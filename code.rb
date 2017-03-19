@@ -19,7 +19,7 @@ bot.server_create do |event|
   all_count = event.server.member_count
   members_count = event.server.online_members(include_idle: true, include_bots: false).count
   maths = all_count - members_count
-  maths_two = (maths / members_count) * members_count
+  maths_two = (maths / members_count)
   percentage_count = maths_two * 100
   if percentage_count >= 50
     event.server.leave
