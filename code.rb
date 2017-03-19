@@ -18,7 +18,7 @@ end
 bot.server_create do |event|
   all_count = event.server.member_count
   members_count = event.server.online_members(include_idle: true, include_bots: false).count
-  percentage_count = (all_count / members_count) * 100.0
+  percentage_count = (members_count / all_count) * 100.0
   if percentage_count >= 0.5
     event.server.leave
     bot.send_message(281280895577489409, "Automatically left `#{event.server.name}` (ID: #{event.server.id}) due to high user:bot ratio (#{percentage_count}%)")
