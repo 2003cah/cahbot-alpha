@@ -4,7 +4,7 @@
 [Beta GitHub](https://github.com/2003cah/cahbot-beta)  
 Join the Discord: ![Discord](https://discordapp.com/api/guilds/252196054101917696/widget.png)  
 
-#### ***A small Discord bot with loads of potential, but here we test it.***
+#### ***A small Discord bot with loads of potential, but here we test it to it's limits.***
 
 Heyo, this is CahBot Alpha! Where stuff is so experimental, the word "experimental" loses its meaning
 
