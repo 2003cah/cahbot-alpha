@@ -3,7 +3,7 @@ require 'configatron'
 require 'open-uri'
 require_relative 'config.rb'
 
-bot = Discordrb::Commands::CommandBot.new token: configatron.token, client_id: 267104172049039373, prefix: ['A^', '<@291390171151335424> '], ignore_bots: true
+bot = Discordrb::Commands::CommandBot.new token: configatron.token, client_id: 291390171151335424, prefix: ['A^', '<@291390171151335424> '], ignore_bots: true
 
 bot.bucket :normal, limit: 5, time_span: 15, delay: 3
 
@@ -16,7 +16,15 @@ bot.ready do |event|
 end
 
 bot.server_create do |event|
-  bot.send_message(281280895577489409, "CahBot Alpha just joined `#{event.server.name}` (ID: #{event.server.id}), owned by `#{event.server.owner.distinct}` (ID: #{event.server.owner.id}), the server count is now #{bot.servers.count}")
+  all_count = event.server.member_count
+  members_count = event.server.online_members(include_idle: true, include_bots: false).count
+  bot_count = (all_count - members_count) / 100
+  if bot_count >= 50
+    event.server.leave
+    bot.send_message(281280895577489409, "Automatically left #{event.server.name} (ID: #{event.server.id}) due to high user:bot ratio")
+  else
+    bot.send_message(281280895577489409, "CahBot Alpha just joined `#{event.server.name}` (ID: #{event.server.id}), owned by `#{event.server.owner.distinct}` (ID: #{event.server.owner.id}), the server count is now #{bot.servers.count}")
+  end
 end
 
 bot.server_delete do |event|
