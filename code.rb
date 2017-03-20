@@ -314,4 +314,8 @@ bot.command(:feedback, min_args: 1) do |event, *args|
   end
 end
 
-bot.run
+bot.run :async
+
+bot.send_message(281280895577489409, "Restarted/Booted successfully")
+
+bot.sync
