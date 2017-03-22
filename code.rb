@@ -18,12 +18,10 @@ end
 bot.server_create do |event|
   all_count = event.server.member_count
   members_count = event.server.online_members(include_idle: true, include_bots: false).count
-  maths = all_count - members_count
-  maths_two = maths / members_count
-  percentage_count = maths_two / all_count * 100
-  if percentage_count >= 50
+  maths = (members_count / all_count) * 100.0
+  if maths >= 50
     event.server.leave
-    bot.send_message(281280895577489409, "Automatically left `#{event.server.name}` (ID: #{event.server.id}) due to high user:bot ratio (#{percentage_count}% bots)")
+    bot.send_message(281280895577489409, "Automatically left `#{event.server.name}` (ID: #{event.server.id}) due to high online user to bot ratio (#{maths}% bots)")
   else
     bot.send_message(281280895577489409, "CahBot Alpha just joined `#{event.server.name}` (ID: #{event.server.id}), owned by `#{event.server.owner.distinct}` (ID: #{event.server.owner.id}), the server count is now #{bot.servers.count}")
   end
@@ -85,7 +83,8 @@ bot.command(:set, help_available: false) do |event, action, args|
       idle = bot.idle
       invis = bot.invisible
       dnd = bot.dnd
-      eval args.join; "Status Changed!"
+      args.join nil
+      "Status Changed!"
     else
       'I don\'t know what to do!'
     end
@@ -315,4 +314,8 @@ bot.command(:feedback, min_args: 1) do |event, *args|
   end
 end
 
-bot.run
+bot.run :async
+
+bot.send_message(287050338144616449, "Restarted/Booted successfully")
+
+bot.sync
