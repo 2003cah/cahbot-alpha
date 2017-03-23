@@ -12,6 +12,4 @@ Heyo, this is CahBot Alpha! Where stuff is so experimental, the word "experiment
 
 Y'know, it's hard to update this list every single time I update something, so just use `A^cmds` and figure it out, thanks!
 
-#### **Why is this repo here, you may ask**
- 
- Well, it's a pretty easy way to transfer code from my PC to my VPS, that's about all. Some sort of license for using code will appear soon:tm:
+#### For a coolor looking README blablahbla [here](https://github.com/2003cah/cahbot/blob/master/README.md)
