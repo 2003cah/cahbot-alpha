@@ -67,7 +67,7 @@ bot.command(:restart, help_available: false) do |event|
   end
 end
 
-bot.command(:set, help_available: false) do |event, action, args|
+bot.command(:set, help_available: false) do |event, action, *args|
   if event.user.id == 228290433057292288
     case action
     when 'avatar'
@@ -79,11 +79,11 @@ bot.command(:set, help_available: false) do |event, action, args|
       bot.game = args.to_s
       event.respond 'GAME SET!'
     when 'status'
-      online = 'bot.on'
-      idle = 'bot.idle'
-      invis = 'bot.invisible'
-      dnd = 'bot.dnd'
-      eval args;
+      online = bot.on
+      idle = bot.idle
+      invis = bot.invisible
+      dnd = bot.dnd
+      eval args.join(' ');
       "Status Changed!"
     else
       'I don\'t know what to do!'
