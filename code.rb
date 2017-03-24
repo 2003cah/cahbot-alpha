@@ -79,11 +79,11 @@ bot.command(:set, help_available: false) do |event, action, args|
       bot.game = args.to_s
       event.respond 'GAME SET!'
     when 'status'
-      online = bot.on
-      idle = bot.idle
-      invis = bot.invisible
-      dnd = bot.dnd
-      eval args.join(' ')
+      online = 'bot.on'
+      idle = 'bot.idle'
+      invis = 'bot.invisible'
+      dnd = 'bot.dnd'
+      eval args
       nil
       "Status Changed!"
     else
