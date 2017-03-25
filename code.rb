@@ -316,6 +316,5 @@ end
 
 bot.run :async
 
-bot.send_message(287050338144616449, "Restarted/Booted successfully")
 
 bot.sync
