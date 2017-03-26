@@ -198,7 +198,7 @@ bot.command(:invite, help_available: false, max_args: 0, usage: 'A^invite') do |
   bot.send_message(281280895577489409, "^invite | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
 end
 
-bot.command(:say, help_available: false, required_permissions: [:manage_messages], min_args: 1, permission_message: "Sorry, you need the Manage Messages perm in order to use A^say", usage: 'A^say <words>') do |event, *args|
+bot.command(:say, help_available: false, required_permissions: [:manage_messages], permission_message: "Sorry, you need the Manage Messages perm in order to use A^say") do |event, *args|
   if event.message.content[6..-1] == nil
     "I can't hear you!"
   else
