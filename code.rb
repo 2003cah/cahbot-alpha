@@ -113,7 +113,7 @@ bot.command(:kick, help_available: false, required_permissions: [:kick_members],
   if can_do_the_other_magic_dance == true
     if !event.message.mentions.empty?
       begin
-        mention = bot.parse_mention("#{args.join}").id
+        mention = bot.parse_mention("#{args.join.to_i}").id
         event.server.kick(mention)
         event.respond ["<@#{mention}> has been keked", "<@#{mention}> has been kicked"]
       rescue => e
