@@ -113,8 +113,8 @@ bot.command(:kick, help_available: false, required_permissions: [:kick_members],
   if can_do_the_other_magic_dance == true
     if !event.message.mentions.empty?
       begin
-        mention = bot.parse_mention("#{args.join.to_i}").id
-        event.server.kick(mention)
+        mention = bot.parse_mention("#{args.join}").id
+        event.server.kick(mention.to_i)
         event.respond ["<@#{mention}> has been keked", "<@#{mention}> has been kicked"]
       rescue => e
         event.respond "The user you are trying to kick has a role higher than/equal to me. If you believe this is a mistake, report this to the CB Server"
