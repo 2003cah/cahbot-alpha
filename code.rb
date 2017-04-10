@@ -151,14 +151,19 @@ bot.command(:announce, help_available: false, min_args: 3, usage: 'A^announce ye
           7701739, 8312810, 13798754, 15453783, 12107214, 9809797,
           2582883, 13632200, 12690287, 14127493].sample
       end
+      event.message.delete
+      event.respond "Announced successfully, @#{event.user.distinct}"
     when 'mentioneveryone'
-      bot.channel(bot.find_channel("announcements", server_name = event.server.name).to_s.split[2][3..-1]).send_message "**New Announcement (By #{event.user.distinct})!** \n \n #{event.message.content[29..-1]}"
-    end
-    if action.nil? == true
+      bot.channel(bot.find_channel("announcements", server_name = event.server.name).to_s.split[2][3..-1]).send_message "@everyone | **New Announcement (By #{event.user.distinct})!** \n \n #{event.message.content[29..-1]}"
+      event.message.delete
+      event.respond "Announced successfully, @#{event.user.distinct}"
+    when 'nomention'
       bot.channel(bot.find_channel("announcements", server_name = event.server.name).to_s.split[2][3..-1]).send_message "**New Announcement (By #{event.user.distinct})!** \n \n #{event.message.content[10..-1]}"
+      event.message.delete
+      event.respond "Announced successfully, @#{event.user.distinct}"
     end
-   rescue => e
-  "Ah geez, something bad happened. This might be due to you not having an \#announcements channel. Nonetheless, this has been reported to Cah"
+  rescue => e
+  event.respond "Ah geez, something bad happened. This might be due to you not having an \#announcements channel. Nonetheless, this has been reported to Cah"
   bot.send_message(281280895577489409, "ERROR on server #{event.server.name} (ID: #{event.server.id}) for command `A^announce`, `#{e}`")
   end
 end
