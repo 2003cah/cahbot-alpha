@@ -158,7 +158,7 @@ bot.command(:announce, help_available: false, min_args: 3, usage: 'A^announce ye
       event.message.delete
       event.respond "Announced successfully, @#{event.user.distinct}"
     when 'nomention'
-      bot.channel(bot.find_channel("announcements", server_name = event.server.name).to_s.split[2][3..-1]).send_message "**New Announcement (By #{event.user.distinct})!** \n \n #{event.message.content[10..-1]}"
+      bot.channel(bot.find_channel("announcements", server_name = event.server.name).to_s.split[2][3..-1]).send_message "**New Announcement (By #{event.user.distinct})!** \n \n #{event.message.content[20..-1]}"
       event.message.delete
       event.respond "Announced successfully, @#{event.user.distinct}"
     end
