@@ -137,6 +137,32 @@ bot.command(:kick, help_available: false, required_permissions: [:kick_members],
   bot.send_message(281280895577489409, "^kick | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
 end
 
+bot.command(:announce, help_available: false, min_args: 3, usage: 'A^announce yes/no yes/no <words>', required_permissions: [:kick_members], permission_message: 'Just because, only those with the Administrator permission can announce stuff') do |event, action, words|
+  begin
+    case action
+    when 'embed'
+      bot.channel(bot.find_channel("announcements", server_name = event.server.name).to_s.split[2][3..-1]).send_embed do |e|
+        e.title = "New Announcement (By #{event.user.distinct})!"
+        e.description = event.message.content[16..-1]
+        e.color = [11736341, 3093151, 2205818, 2353205, 12537412, 12564286,
+          3306856, 9414906, 3717172, 14715195, 3813410, 9899000,
+          16047888, 4329932, 12906212, 9407771, 1443384, 13694964,
+          6157013, 8115963, 9072972, 16299832, 15397264, 10178593,
+          7701739, 8312810, 13798754, 15453783, 12107214, 9809797,
+          2582883, 13632200, 12690287, 14127493].sample
+      end
+    when 'mentioneveryone'
+      bot.channel(bot.find_channel("announcements", server_name = event.server.name).to_s.split[2][3..-1]).send_message "**New Announcement (By #{event.user.distinct})!** \n \n #{event.message.content[29..-1]}"
+    end
+    if action.nil? == true
+      bot.channel(bot.find_channel("announcements", server_name = event.server.name).to_s.split[2][3..-1]).send_message "**New Announcement (By #{event.user.distinct})!** \n \n #{event.message.content[10..-1]}"
+    end
+   rescue => e
+  "Ah geez, something bad happened. This might be due to you not having an \#announcements channel. Nonetheless, this has been reported to Cah"
+  bot.send_message(281280895577489409, "ERROR on server #{event.server.name} (ID: #{event.server.id}) for command `A^announce`, `#{e}`")
+  end
+end
+
 bot.command(:ping, help_available: false, max_args: 0, usage: 'A^ping') do |event|
   m = event.respond('Pinging!')
   m.edit "Pong! Hey, that took #{((Time.now - event.timestamp) * 1000).to_i}ms."
