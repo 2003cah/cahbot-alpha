@@ -154,11 +154,11 @@ bot.command(:announce, help_available: false, min_args: 2, usage: 'A^announce no
       event.message.delete
       event.respond "Announced successfully, <@#{event.user.distinct}>"
     when 'mentioneveryone'
-      bot.channel(bot.find_channel("announcements", server_name = event.server.name).to_s.split[2][3..-1]).send_message "@everyone | **New Announcement (By #{event.user.distinct})!** \n \n #{event.message.content[29..-1]}"
+      bot.channel(bot.find_channel("announcements", server_name = event.server.name).to_s.split[2][3..-1]).send_message "@everyone | **New Announcement (By #{event.user.distinct})!** \n \n#{event.message.content[28..-1]}"
       event.message.delete
       event.respond "Announced successfully, <@#{event.user.id}>"
     when 'nomention'
-      bot.channel(bot.find_channel("announcements", server_name = event.server.name).to_s.split[2][3..-1]).send_message "**New Announcement (By #{event.user.distinct})!** \n \n #{event.message.content[22..-1]}"
+      bot.channel(bot.find_channel("announcements", server_name = event.server.name).to_s.split[2][3..-1]).send_message "**New Announcement (By #{event.user.distinct})!** \n \n#{event.message.content[21..-1]}"
       event.message.delete
       event.respond "Announced successfully, <@#{event.user.id}>"
     end
