@@ -45,7 +45,7 @@ bot.command(:eval, help_available: false) do |event, *code|
     begin
       event << 'Eval Complete!'
       event << ''
-      event << "Output: ```#{eval code.join(' ')} ```"
+      event << "Output: ```#{eval event.message.content[6..-1]} ```"
     rescue => e
       event << 'Eval Failed!'
       event << ''
