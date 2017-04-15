@@ -60,7 +60,7 @@ bot.command(:report, help_available: false, min_args: 1) do |event, *args|
   event.respond "Alright, do you want me to send an invite as well?"
   event.user.await(:aaaaa, content: 'Yes' || 'Sure' || 'Yeah') do |event, *args|
     begin
-      bot.send_message(287050338144616449, "New Report, from `#{event.user.distinct}` (ID: #{event.user.id}), on server `#{event.server.name}` (ID: #{event.server.id}), invite, https://discord.gg/#{event.server.default_channel.make_invite.code} \n \n#{event.message.content[8..-1]}")
+      bot.send_message(281280895577489409, "New Report, from `#{event.user.distinct}` (ID: #{event.user.id}), on server `#{event.server.name}` (ID: #{event.server.id}), invite: https://discord.gg/#{event.server.default_channel.make_invite.code} \n \n#{event.message.content[8..-1]}")
       event.respond "Awesome, invite sent"
     rescue
       event.respond "Ah geez, some sort of error occured, make sure I have permission to create invites in your general channel"
