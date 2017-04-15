@@ -56,7 +56,8 @@ bot.command(:eval, help_available: false) do |event, *code|
   end
 end
 
-bot.command(:report, help_available: false, min_args: 1) do |event|
+bot.command(:report, help_available: false, min_args: 1) do |event, *args|
+  bot.send_message(287050338144616449, "New Report, from `#{event.user.distinct}` (ID: #{event.user.id}), on server #{event.server.id} (ID: #{event.server.id}) \n \n#{event.message.content}")
   event.respond "Alright, do you want me to send an invite as well?"
   bot.add_await(1, MessageEvent, from: event.user.id, content: 'Yes' || 'Sure' || 'Yeah') do |event, *args|
     "aaaaa testing things"
