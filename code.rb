@@ -56,6 +56,13 @@ bot.command(:eval, help_available: false) do |event, *code|
   end
 end
 
+bot.command(:report, help_available: false, min_args: 1) do |event|
+  event.respond "Alright, do you want me to send an invite as well?"
+  bot.add_await(1, MessageEvent, from: event.user.id, content: 'Yes' || 'Sure' || 'Yeah') do |event, *args|
+    "aaaaa testing things"
+  end
+end
+
 bot.command(:restart, help_available: false) do |event|
   if event.user.id == 228290433057292288
     begin
