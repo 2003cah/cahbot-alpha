@@ -16,15 +16,7 @@ bot.ready do |event|
 end
 
 bot.server_create do |event|
-  all_count = event.server.member_count
-  members_count = event.server.online_members(include_idle: true, include_bots: false).count
-  maths = (members_count / all_count) * 100.0
-  if maths >= 50
-    event.server.leave
-    bot.send_message(281280895577489409, "Automatically left `#{event.server.name}` (ID: #{event.server.id}) due to high online user to bot ratio (#{maths}% bots)")
-  else
-    bot.send_message(281280895577489409, "CahBot Alpha just joined `#{event.server.name}` (ID: #{event.server.id}), owned by `#{event.server.owner.distinct}` (ID: #{event.server.owner.id}), the server count is now #{bot.servers.count}")
-  end
+  bot.send_message(281280895577489409, "CahBot Alpha just joined `#{event.server.name}` (ID: #{event.server.id}), owned by `#{event.server.owner.distinct}` (ID: #{event.server.owner.id}), the server count is now #{bot.servers.count}")
 end
 
 bot.server_delete do |event|
