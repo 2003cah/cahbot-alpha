@@ -250,14 +250,18 @@ bot.command([:reverse, :rev], help_available: false, min_args: 1, usage: '>sdrow
 end
 
 bot.command(:userinfo, help_available: false, max_args: 0, usage: 'A^userinfo') do |event|
-  event << "**__User Info For You (in the works still)__**"
+  event << "**__User Info For You__**"
   event << ""
   event << "**User ID:** `#{event.user.id}`"
   event << "**User Discrim:** `#{event.user.discrim}`"
   event << "**Username:** `#{event.user.name}`"
-  event << "**True or False: Are You A Bot?** `#{event.user.current_bot?}`"
-  event << "**User Nickname** `#{event.user.nick}`"
-  event << "**User Avatar (may be wrong due to gif avatars):** https://discordapp.com/api/v6/users/#{event.user.id}/avatars/#{event.user.avatar_id}.jpg"
+  if (event.user.nick != nil)
+    event << "**User Nickname:** `#{event.user.nick}`"
+  end
+  if (event.user.game != nil)
+    event << "**User Game:** `#{event.user.game}`"
+  end
+  event << "**User Avatar:** https://cdn.discordapp.com/avatars/#{event.user.id}/#{event.user.avatar_id}.webp?size=1024"
   bot.send_message(281280895577489409, "^userinfo | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
 end
 
@@ -291,7 +295,7 @@ bot.command(:help, help_available: false, max_args: 0, usage: 'A^help') do |even
 end
 
 bot.command(:noot, help_available: false, max_args: 0, usage: 'A^noot') do |event|
-  event.respond "NOOT https://s-media-cache-ak0.pinimg.com/originals/fe/cb/80/fecb80585eca20163a4d57fa281610b8.gif"
+  event.respond "**NOOT** https://cahbot.pro/noot.gif"
   bot.send_message(281280895577489409, "^noot | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
 end
 
