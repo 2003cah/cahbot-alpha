@@ -310,7 +310,7 @@ bot.command([:cmds, :commands], chain_usable: false, max_args: 0, usage: 'A^comm
   event << '*__Moderation Commands (in the works)__*'
   event << '`A^ban <mention>`: Bans the user mentioned and deletes the past 7 days of messages from them'
   event << '`A^kick <mention>`: Kicks the user mentioned (A bit bugged, working on it)'
-  event << '`A^say`: Makes CBB say something, you need the manage messages perm tho ~~yes I know it\'s not much of a moderation command shut up~~'
+  event << '`A^say`: Makes CBA say something, you need the manage messages perm tho ~~yes I know it\'s not much of a moderation command shut up~~'
   event << ''
   event << '*__Fun Commands/Other Commands/Things I Was Too Lazy To Group__*'
   event << '(upon saying "CBA prefix") reminds you the prefix'
