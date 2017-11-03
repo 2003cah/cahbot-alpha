@@ -221,7 +221,7 @@ end
 
 bot.message(with_text: 'CBA prefix') do |event|
   event.respond "My prefix is `A^`. For help, do `A^help`"
-  bot.send_message(281280895577489409, "\"CBB Prefix\" | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
+  bot.send_message(281280895577489409, "\"CBC Prefix\" | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
 end
 
 bot.command(:rnumber, help_available: false, min_args: 2, max_args: 2, usage: 'A^rnumber <small num> <large num>') do |event, min, max|
