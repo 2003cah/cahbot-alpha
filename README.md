@@ -13,4 +13,4 @@ Heyo, this is CahBot Alpha! Where stuff is so experimental, the word "experiment
 
 Y'know, it's hard to update this list every single time I update something, so just use `A^cmds` and figure it out, thanks!
 
-#### For a coolor looking README blablahbla [here](https://github.com/2003cah/cahbot/blob/master/README.md)
+#### For a cooler looking README blablahbla [here](https://github.com/CahBots/cahbot/blob/master/README.md)
