@@ -207,10 +207,10 @@ bot.command(:info, help_available: false, max_args: 0, usage: 'A^info') do |even
   event << "***Info About CahBot:***"
   event << ""
   event << "**What is CahBot/CahBot Alpha?** CB is a small Discord bot with loads of potential, Alpha is the super-duper-ultra-mega borderline experimental version."
-  event << "**Who made CahBot?** Cah#5153 coded CahBot, with help from happyzachariah#6121 and others"
+  event << "**Who made CahBot?** Cah#5153 coded CahBot, with some help from happyzachariah#6121, tons of help from Chew#6216 & others"
   event << "**Why does CahBot exist?** One day I was bored so I made a Discord bot. End of story kthxbai"
-  event << "**Does CahBot have a server or something?** You bet, https://goo.gl/02ZRK5"
-  event << "**u suk a bunnch an u can hardly mak a disc cord bawt.** Radical, thank you for noticing"
+  event << "**Does CahBot have a server or something?** You bet, https://discord.gg/cWmvfmz"
+  event << "**u suk a bunnch an u can hardly mak a discord bawt.** Radical, thank you for noticing"
   bot.send_message(281280895577489409, "^info | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
 end
 
