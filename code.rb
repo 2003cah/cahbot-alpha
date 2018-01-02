@@ -3,28 +3,28 @@ require 'configatron'
 require 'open-uri'
 require_relative 'config.rb'
 
-bot = Discordrb::Commands::CommandBot.new token: configatron.token, client_id: 291390171151335424, prefix: ['A^', '<@291390171151335424> '], ignore_bots: true
+bot = Discordrb::Commands::CommandBot.new token: configatron.token, client_id: 291_390_171_151_335_424, prefix: ['A^', '<@291390171151335424> '], ignore_bots: true
 
 bot.bucket :normal, limit: 5, time_span: 15, delay: 3
 
-bot.ready do |event|
+bot.ready do |_event|
   sleep 180
-  bot.game = "Use A^cmds or A^info"
+  bot.game = 'Use A^cmds or A^info'
   sleep 180
   bot.game = "on #{bot.servers.count} servers!"
   redo
 end
 
 bot.server_create do |event|
-  bot.send_message(281280895577489409, "CahBot Alpha just joined `#{event.server.name}` (ID: #{event.server.id}), owned by `#{event.server.owner.distinct}` (ID: #{event.server.owner.id}), the server count is now #{bot.servers.count}")
+  bot.send_message(281_280_895_577_489_409, "CahBot Alpha just joined `#{event.server.name}` (ID: #{event.server.id}), owned by `#{event.server.owner.distinct}` (ID: #{event.server.owner.id}), the server count is now #{bot.servers.count}")
 end
 
 bot.server_delete do |event|
-  bot.send_message(281280895577489409, "CahBot Alpha just left `#{event.server.name}` (ID: #{event.server.id}), the server count is now #{bot.servers.count}")
+  bot.send_message(281_280_895_577_489_409, "CahBot Alpha just left `#{event.server.name}` (ID: #{event.server.id}), the server count is now #{bot.servers.count}")
 end
 
 bot.command(:die, help_available: false) do |event|
-  if event.user.id == 228290433057292288
+  if event.user.id == 228_290_433_057_292_288
     bot.send_message(event.channel.id, 'CahBot Alpha is shutting down')
     exit
   else
@@ -32,8 +32,8 @@ bot.command(:die, help_available: false) do |event|
   end
 end
 
-bot.command(:eval, help_available: false) do |event, *code|
-  if event.user.id == 228290433057292288
+bot.command(:eval, help_available: false) do |event, *_code|
+  if event.user.id == 228_290_433_057_292_288
     begin
       event << 'Eval Complete!'
       event << ''
@@ -48,21 +48,21 @@ bot.command(:eval, help_available: false) do |event, *code|
   end
 end
 
-bot.command(:report, help_available: false, min_args: 1) do |event, *args|
-  event.respond "Alright, do you want me to send an invite as well?"
-  event.user.await(:aaaaa, content: 'Yes' || 'Sure' || 'Yeah') do |event, *args|
+bot.command(:report, help_available: false, min_args: 1) do |event, *_args|
+  event.respond 'Alright, do you want me to send an invite as well?'
+  event.user.await(:aaaaa, content: 'Yes' || 'Sure' || 'Yeah') do |event, *_args|
     begin
-      bot.send_message(281280895577489409, "New Report, from `#{event.user.distinct}` (ID: #{event.user.id}), on server `#{event.server.name}` (ID: #{event.server.id}), invite: https://discord.gg/#{event.server.default_channel.make_invite.code} \n \n#{event.message.content[8..-1]}")
-      event.respond "Awesome, invite sent"
+      bot.send_message(281_280_895_577_489_409, "New Report, from `#{event.user.distinct}` (ID: #{event.user.id}), on server `#{event.server.name}` (ID: #{event.server.id}), invite: https://discord.gg/#{event.server.default_channel.make_invite.code} \n \n#{event.message.content[8..-1]}")
+      event.respond 'Awesome, invite sent'
     rescue
-      event.respond "Ah geez, some sort of error occured, make sure I have permission to create invites in your general channel"
+      event.respond 'Ah geez, some sort of error occured, make sure I have permission to create invites in your general channel'
     end
   end
   nil
 end
 
 bot.command(:restart, help_available: false) do |event|
-  if event.user.id == 228290433057292288
+  if event.user.id == 228_290_433_057_292_288
     begin
       event.respond ['Into the ***fuuuutttttuuuuurrrreeee***', 'Please wait...', 'How about n—', 'Can do :thumbsup::skin-tone-1:', 'Pong! Hey, that took... Oh wait, wrong command', 'Ask again at a later ti—'].sample
       exec('bash restart.sh')
@@ -73,23 +73,23 @@ bot.command(:restart, help_available: false) do |event|
 end
 
 bot.command(:set, help_available: false) do |event, action, *args|
-  if event.user.id == 228290433057292288
+  if event.user.id == 228_290_433_057_292_288
     case action
     when 'avatar'
-      open("#{args.join(' ')}") { |pic| event.bot.profile.avatar = pic }
+      open(args.join(' ').to_s) { |pic| event.bot.profile.avatar = pic }
     when 'username'
-      name = "#{args.join(' ')}"
+      name = args.join(' ').to_s
       event.respond "Username set to `#{bot.profile.username = name}`"
     when 'game'
-      bot.game = "#{args.join(' ')}"
+      bot.game = args.join(' ').to_s
       event.respond 'GAME SET!'
     when 'status'
       online = bot.on
       idle = bot.idle
       invis = bot.invisible
       dnd = bot.dnd
-      eval args.join(' ');
-      "Status Changed!"
+      eval args.join(' ')
+      'Status Changed!'
     else
       'I don\'t know what to do!'
     end
@@ -104,20 +104,20 @@ bot.command(:ban, help_available: false, required_permissions: [:ban_members], p
   if can_do_the_magic_dance == true
     if !event.message.mentions.empty?
       begin
-        mention = bot.parse_mention("#{args.join}").id
-        event.server.ban("#{mention}", message_days = 7)
+        mention = bot.parse_mention(args.join.to_s).id
+        event.server.ban(mention.to_s, message_days = 7)
         event.respond ["<@#{mention}> has been beaned, the past 7 days of messages from them have been deleted", "<@#{mention}> has been banned, the past 7 days of messages from them have been deleted"]
       rescue => e
-        event.respond "The user you are trying to ban has a role higher than/equal to me. If you believe this is a mistake, report this to the CB Server"
-        bot.send_message(281280895577489409, "ERROR on server #{event.server.name} (ID: #{event.server.id}) for command `A^ban`, `#{e}`")
+        event.respond 'The user you are trying to ban has a role higher than/equal to me. If you believe this is a mistake, report this to the CB Server'
+        bot.send_message(281_280_895_577_489_409, "ERROR on server #{event.server.name} (ID: #{event.server.id}) for command `A^ban`, `#{e}`")
       else
-        event.respond "Sorry, but I do not have the \"Ban Members\" permission"
+        event.respond 'Sorry, but I do not have the "Ban Members" permission'
       end
     else
-      event.respond "Sorry, but you need to mention the person you want to ban"
+      event.respond 'Sorry, but you need to mention the person you want to ban'
     end
   end
-  bot.send_message(281280895577489409, "^ban | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
+  bot.send_message(281_280_895_577_489_409, "^ban | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
 end
 
 bot.command(:kick, help_available: false, required_permissions: [:kick_members], permission_message: 'Heh, sorry, but you need the Kick Members permission to use this command', max_args: 1, min_args: 1, usage: 'A^kick <mention>') do |event, *args|
@@ -126,148 +126,144 @@ bot.command(:kick, help_available: false, required_permissions: [:kick_members],
   if can_do_the_other_magic_dance == true
     if !event.message.mentions.empty?
       begin
-        mention = bot.parse_mention("#{args.join}").id
+        mention = bot.parse_mention(args.join.to_s).id
         event.server.kick(mention.to_i)
         event.respond ["<@#{mention}> has been keked", "<@#{mention}> has been kicked"]
       rescue => e
-        event.respond "The user you are trying to kick has a role higher than/equal to me. If you believe this is a mistake, report this to the CB Server"
-        bot.send_message(281280895577489409, "ERROR on server #{event.server.name} (ID: #{event.server.id}) for command `A^kick`, `#{e}`")
+        event.respond 'The user you are trying to kick has a role higher than/equal to me. If you believe this is a mistake, report this to the CB Server'
+        bot.send_message(281_280_895_577_489_409, "ERROR on server #{event.server.name} (ID: #{event.server.id}) for command `A^kick`, `#{e}`")
       else
-        event.respond "Sorry, but I do not have the \"Kick Members\" permission"
+        event.respond 'Sorry, but I do not have the "Kick Members" permission'
       end
     else
-      event.respond "Sorry, but you need to mention the person you want to kick"
+      event.respond 'Sorry, but you need to mention the person you want to kick'
     end
   end
-  bot.send_message(281280895577489409, "^kick | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
+  bot.send_message(281_280_895_577_489_409, "^kick | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
 end
 
-bot.command(:announce, help_available: false, min_args: 2, usage: 'A^announce nomention/mentioneveryone/embed <words>', required_permissions: [:kick_members], permission_message: 'Just because, only those with the Administrator permission can announce stuff') do |event, action, words|
+bot.command(:announce, help_available: false, min_args: 2, usage: 'A^announce nomention/mentioneveryone/embed <words>', required_permissions: [:kick_members], permission_message: 'Just because, only those with the Administrator permission can announce stuff') do |event, action, _words|
   begin
     case action
     when 'embed'
-      bot.channel(bot.find_channel("announcements", server_name = event.server.name).to_s.split[2][3..-1]).send_embed do |e|
+      bot.channel(bot.find_channel('announcements', server_name = event.server.name).to_s.split[2][3..-1]).send_embed do |e|
         e.title = "New Announcement (By #{event.user.distinct})!"
         e.description = event.message.content[16..-1]
-        e.color = [11736341, 3093151, 2205818, 2353205, 12537412, 12564286,
-          3306856, 9414906, 3717172, 14715195, 3813410, 9899000,
-          16047888, 4329932, 12906212, 9407771, 1443384, 13694964,
-          6157013, 8115963, 9072972, 16299832, 15397264, 10178593,
-          7701739, 8312810, 13798754, 15453783, 12107214, 9809797,
-          2582883, 13632200, 12690287, 14127493].sample
+        e.color = [11_736_341, 3_093_151, 2_205_818, 2_353_205, 12_537_412, 12_564_286,
+                   3_306_856, 9_414_906, 3_717_172, 14_715_195, 3_813_410, 9_899_000,
+                   16_047_888, 4_329_932, 12_906_212, 9_407_771, 1_443_384, 13_694_964,
+                   6_157_013, 8_115_963, 9_072_972, 16_299_832, 15_397_264, 10_178_593,
+                   7_701_739, 8_312_810, 13_798_754, 15_453_783, 12_107_214, 9_809_797,
+                   2_582_883, 13_632_200, 12_690_287, 14_127_493].sample
       end
       event.message.delete
       event.respond "Announced successfully, <@#{event.user.distinct}>"
     when 'mentioneveryone'
-      bot.channel(bot.find_channel("announcements", server_name = event.server.name).to_s.split[2][3..-1]).send_message "@everyone | **New Announcement (By #{event.user.distinct})!** \n \n#{event.message.content[28..-1]}"
+      bot.channel(bot.find_channel('announcements', server_name = event.server.name).to_s.split[2][3..-1]).send_message "@everyone | **New Announcement (By #{event.user.distinct})!** \n \n#{event.message.content[28..-1]}"
       event.message.delete
       event.respond "Announced successfully, <@#{event.user.id}>"
     when 'nomention'
-      bot.channel(bot.find_channel("announcements", server_name = event.server.name).to_s.split[2][3..-1]).send_message "**New Announcement (By #{event.user.distinct})!** \n \n#{event.message.content[21..-1]}"
+      bot.channel(bot.find_channel('announcements', server_name = event.server.name).to_s.split[2][3..-1]).send_message "**New Announcement (By #{event.user.distinct})!** \n \n#{event.message.content[21..-1]}"
       event.message.delete
       event.respond "Announced successfully, <@#{event.user.id}>"
     end
   rescue => e
-  event.respond "Ah geez, something bad happened. This might be due to you not having an \#announcements channel. Nonetheless, this has been reported to Cah"
-  bot.send_message(281280895577489409, "ERROR on server #{event.server.name} (ID: #{event.server.id}) for command `A^announce`, `#{e}`")
+    event.respond "Ah geez, something bad happened. This might be due to you not having an \#announcements channel. Nonetheless, this has been reported to Cah"
+    bot.send_message(281_280_895_577_489_409, "ERROR on server #{event.server.name} (ID: #{event.server.id}) for command `A^announce`, `#{e}`")
   end
 end
 
 bot.command(:ping, help_available: false, max_args: 0, usage: 'A^ping') do |event|
   m = event.respond('Pinging!')
   m.edit "Pong! Hey, that took #{((Time.now - event.timestamp) * 1000).to_i}ms."
-  bot.send_message(281280895577489409, "^ping | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
+  bot.send_message(281_280_895_577_489_409, "^ping | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
 end
 
-bot.command([:eightball, :eball, :'8ball'], help_available: false, min_args: 1, usage: 'A^8ball <words>', bucket: :normal, rate_limit_message: 'Even the 8ball needs a break... (`%time%` seconds left)') do |event|
-  event.respond ["Sources say... Yeah", "Sources say... Nah", "Perhaps", "As I see it, yes", "As I see it, no", "If anything, probably", "Not possible", "Ask again at a later time", "Say that again?", "lol idk", "Probably not", "woahdude", "[object Object]", "Undoubtfully so", "I doubt it", "Eh, maybe"].sample
-  bot.send_message(281280895577489409, "^eightball | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
+bot.command(%i[eightball eball 8ball], help_available: false, min_args: 1, usage: 'A^8ball <words>', bucket: :normal, rate_limit_message: 'Even the 8ball needs a break... (`%time%` seconds left)') do |event|
+  event.respond ['Sources say... Yeah', 'Sources say... Nah', 'Perhaps', 'As I see it, yes', 'As I see it, no', 'If anything, probably', 'Not possible', 'Ask again at a later time', 'Say that again?', 'lol idk', 'Probably not', 'woahdude', '[object Object]', 'Undoubtfully so', 'I doubt it', 'Eh, maybe'].sample
+  bot.send_message(281_280_895_577_489_409, "^eightball | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
 end
 
 bot.command(:roll, help_available: false, max_args: 0, usage: 'A^roll', bucket: :normal, rate_limit_message: 'There\'s no way you can roll a die that fast (`%time%` seconds left)') do |event|
   h = event.respond '**Rolling Dice!**'
   sleep [1, 2, 3].sample
   h.edit "And you got a... **#{rand(1..6)}!**"
-  bot.send_message(281280895577489409, "^roll | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
+  bot.send_message(281_280_895_577_489_409, "^roll | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
 end
 
 bot.command(:flip, help_available: false, max_args: 0, usage: 'A^flip', bucket: :normal, rate_limit_message: 'There\'s no way you can flip a coin that fast (`%time%` seconds left)') do |event|
   m = event.respond '**Flipping Coin...**'
   sleep [1, 2, 3].sample
-  m.edit ["woahdude, you got **Heads**", "woahdude, you got **Tails**", "You got **heads**", "You got **tails**"].sample
-  bot.send_message(281280895577489409, "^flip | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
+  m.edit ['woahdude, you got **Heads**', 'woahdude, you got **Tails**', 'You got **heads**', 'You got **tails**'].sample
+  bot.send_message(281_280_895_577_489_409, "^flip | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
 end
 
 bot.command(:flop, help_available: false, max_args: 0, usage: 'A^flop', bucket: :normal, rate_limit_message: 'There\'s no way you can coin a fast that flop (`%time%` seconds left)') do |event|
-  m = event.respond ["Oops, the coin flipped so high it didn't come back down", "The coin multiplied and landed on both", "The coin... disappeared", "Pong! It took **#{((Time.now - event.timestamp) * 1000).to_i}ms** to ping the coin", "And you got a... **#{rand(1..6)}!** wait thats not how coins work", "Perhaps you could resolve your situation without relying on luck", "noot", "[Witty joke concerning flipping a coin]", "[BOTTOM TEXT]"].sample
-  bot.send_message(281280895577489409, "^flop | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
+  m = event.respond ["Oops, the coin flipped so high it didn't come back down", 'The coin multiplied and landed on both', 'The coin... disappeared', "Pong! It took **#{((Time.now - event.timestamp) * 1000).to_i}ms** to ping the coin", "And you got a... **#{rand(1..6)}!** wait thats not how coins work", 'Perhaps you could resolve your situation without relying on luck', 'noot', '[Witty joke concerning flipping a coin]', '[BOTTOM TEXT]'].sample
+  bot.send_message(281_280_895_577_489_409, "^flop | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
 end
 
 bot.command(:info, help_available: false, max_args: 0, usage: 'A^info') do |event|
-  event << "***Info About CahBot:***"
-  event << ""
-  event << "**What is CahBot/CahBot Alpha?** CB is a small Discord bot with loads of potential, Alpha is the super-duper-ultra-mega borderline experimental version."
-  event << "**Who made CahBot?** Cah#5153 coded CahBot, with some help from happyzachariah#6121, tons of help from Chew#6216 & others"
-  event << "**Why does CahBot exist?** One day I was bored so I made a Discord bot. End of story kthxbai"
-  event << "**Does CahBot have a server or something?** You bet, https://discord.gg/cWmvfmz"
-  event << "**u suk a bunnch an u can hardly mak a discord bawt.** Radical, thank you for noticing"
-  bot.send_message(281280895577489409, "^info | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
+  event << '***Info About CahBot:***'
+  event << ''
+  event << '**What is CahBot/CahBot Alpha?** CB is a small Discord bot with loads of potential, Alpha is the super-duper-ultra-mega borderline experimental version.'
+  event << '**Who made CahBot?** Cah#5153 coded CahBot, with some help from happyzachariah#6121, tons of help from Chew#6216 & others'
+  event << '**Why does CahBot exist?** One day I was bored so I made a Discord bot. End of story kthxbai'
+  event << '**Does CahBot have a server or something?** You bet, https://discord.gg/cWmvfmz'
+  event << '**u suk a bunnch an u can hardly mak a discord bawt.** Radical, thank you for noticing'
+  bot.send_message(281_280_895_577_489_409, "^info | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
 end
 
 bot.command(:trello, help_available: false, max_args: 0, usage: 'A^trello') do |event|
-  event.respond "The Trello board for CahBot: https://goo.gl/QNJa3E"
-  bot.send_message(281280895577489409, "^trello | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
+  event.respond 'The Trello board for CahBot: https://goo.gl/QNJa3E'
+  bot.send_message(281_280_895_577_489_409, "^trello | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
 end
 
 bot.message(with_text: 'CBA prefix') do |event|
-  event.respond "My prefix is `A^`. For help, do `A^help`"
-  bot.send_message(281280895577489409, "\"CBA Prefix\" | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
+  event.respond 'My prefix is `A^`. For help, do `A^help`'
+  bot.send_message(281_280_895_577_489_409, "\"CBA Prefix\" | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
 end
 
 bot.command(:rnumber, help_available: false, min_args: 2, max_args: 2, usage: 'A^rnumber <small num> <large num>') do |event, min, max|
-  rand(min.to_i .. max.to_i)
-  bot.send_message(281280895577489409, "^rnumber | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
+  rand(min.to_i..max.to_i)
+  bot.send_message(281_280_895_577_489_409, "^rnumber | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
 end
 
 bot.command(:invite, help_available: false, max_args: 0, usage: 'A^invite') do |event|
-  event.respond "To invite me to your server, head over here: https://goo.gl/rBpKGh"
-  bot.send_message(281280895577489409, "^invite | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
+  event.respond 'To invite me to your server, head over here: https://goo.gl/rBpKGh'
+  bot.send_message(281_280_895_577_489_409, "^invite | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
 end
 
-bot.command(:say, help_available: false, required_permissions: [:manage_messages], permission_message: "Sorry, you need the Manage Messages perm in order to use A^say") do |event, *args|
-  if event.message.content[6..-1] == nil
+bot.command(:say, help_available: false, required_permissions: [:manage_messages], permission_message: 'Sorry, you need the Manage Messages perm in order to use A^say') do |event, *_args|
+  if event.message.content[6..-1].nil?
     "I can't hear you!"
   else
     event.message.delete
-    event.respond "#{event.message.content[6..-1]}"
-    bot.send_message(281280895577489409, "^say | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
+    event.respond event.message.content[6..-1].to_s
+    bot.send_message(281_280_895_577_489_409, "^say | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
   end
 end
 
-bot.command([:reverse, :rev], help_available: false, min_args: 1, usage: '>sdrow< esrever^B') do |event, *args|
-  "#{args.join(' ')}".reverse
-  bot.send_message(281280895577489409, "^reverse | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
+bot.command(%i[reverse rev], help_available: false, min_args: 1, usage: '>sdrow< esrever^B') do |event, *args|
+  args.join(' ').to_s.reverse
+  bot.send_message(281_280_895_577_489_409, "^reverse | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
 end
 
 bot.command(:userinfo, help_available: false, max_args: 0, usage: 'A^userinfo') do |event|
-  event << "**__User Info For You__**"
-  event << ""
+  event << '**__User Info For You__**'
+  event << ''
   event << "**User ID:** `#{event.user.id}`"
   event << "**User Discrim:** `#{event.user.discrim}`"
   event << "**Username:** `#{event.user.name}`"
-  if (event.user.nick != nil)
-    event << "**User Nickname:** `#{event.user.nick}`"
-  end
-  if (event.user.game != nil)
-    event << "**User Game:** `#{event.user.game}`"
-  end
+  event << "**User Nickname:** `#{event.user.nick}`" unless event.user.nick.nil?
+  event << "**User Game:** `#{event.user.game}`" unless event.user.game.nil?
   event << "**User Avatar:** https://cdn.discordapp.com/avatars/#{event.user.id}/#{event.user.avatar_id}.webp?size=1024"
-  bot.send_message(281280895577489409, "^userinfo | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
+  bot.send_message(281_280_895_577_489_409, "^userinfo | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
 end
 
 bot.command(:thanks, help_available: false, max_args: 0, usage: 'A^thanks') do |event|
-  event << "Thanks so much to these current Donors:"
-  event << "ChewLeKitten#6216 - Cool Donor, Contributor, and an ultra-rad person"
+  event << 'Thanks so much to these current Donors:'
+  event << 'ChewLeKitten#6216 - Cool Donor, Contributor, and an ultra-rad person'
   puts "^thanks | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})"
 end
 
@@ -275,31 +271,31 @@ bot.command(:update, help_available: false, max_args: 0, usage: 'A^update') do |
   event << '**Latest CahBot Alpha Update**'
   event << ''
   event << 'Just created Alpha, woot'
-  bot.send_message(281280895577489409, "^update | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
+  bot.send_message(281_280_895_577_489_409, "^update | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
 end
 
-bot.command([:servercount, :servcount], help_available: false, max_args: 0, usage: 'A^servercount') do |event|
+bot.command(%i[servercount servcount], help_available: false, max_args: 0, usage: 'A^servercount') do |event|
   event.respond "CahBot Alpha is on **#{bot.servers.count}** servers as of now"
-  bot.send_message(281280895577489409, "^servercount | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
+  bot.send_message(281_280_895_577_489_409, "^servercount | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
 end
 
 bot.command(:donate, help_available: false, max_args: 0, usage: 'A^donate') do |event|
   event.respond "Hi #{event.user.name}, click here for donations: <https://goo.gl/QBvB7N> ~~*not a virus i swear*~~"
-  bot.send_message(281280895577489409, "^donate | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
+  bot.send_message(281_280_895_577_489_409, "^donate | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
 end
 
 bot.command(:help, help_available: false, max_args: 0, usage: 'A^help') do |event|
   event << ' woahdude, you looking for help? Well, here\'s what you need to know.'
   event << ' For a list of commands, you can do `A^cmds`, for info about CahBot, do `A^info`'
-  bot.send_message(281280895577489409, "^help | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
+  bot.send_message(281_280_895_577_489_409, "^help | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
 end
 
 bot.command(:noot, help_available: false, max_args: 0, usage: 'A^noot') do |event|
-  event.respond "**NOOT** https://cahbot.pro/noot.gif"
-  bot.send_message(281280895577489409, "^noot | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
+  event.respond '**NOOT** https://cahbot.pro/noot.gif'
+  bot.send_message(281_280_895_577_489_409, "^noot | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
 end
 
-bot.command([:cmds, :commands], chain_usable: false, max_args: 0, usage: 'A^commands') do |event|
+bot.command(%i[cmds commands], chain_usable: false, max_args: 0, usage: 'A^commands') do |event|
   event << 'Here are all of my commands for you to use!'
   event << '*__Cah\'s Commands__*'
   event << '`A^restart`: Pulls that fresh code and runs it, provided we don\'t run into a syntax error or anything'
@@ -335,24 +331,24 @@ bot.command([:cmds, :commands], chain_usable: false, max_args: 0, usage: 'A^comm
   event << '`A^noot`: noot (don\'t ask I didn\'t write this)'
   event << ''
   event << 'As always, if you find a horrible bug, report it in the CB Server <https://goo.gl/02ZRK5>'
-  bot.send_message(281280895577489409, "^commands | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
+  bot.send_message(281_280_895_577_489_409, "^commands | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
 end
 
 bot.command(:feedback, min_args: 1) do |event, *args|
   if event.channel.pm? == true
-    bot.send_message(252239053712392192, "New Feedback from `#{event.user.name}`\##{event.user.discriminator}. ID: #{event.user.id}. From a DM.
+    bot.send_message(252_239_053_712_392_192, "New Feedback from `#{event.user.name}`\##{event.user.discriminator}. ID: #{event.user.id}. From a DM.
 
 *#{args.join(' ')}*")
-    m = (event.respond "Radical! Feedback sent.")
+    m = (event.respond 'Radical! Feedback sent.')
     sleep 5
     m.delete
-    bot.send_message(281280895577489409, "^feedback | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) in a DM")
+    bot.send_message(281_280_895_577_489_409, "^feedback | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) in a DM")
   else
     event.message.delete
-    bot.send_message(252239053712392192, "New Feedback from `#{event.user.name}`\##{event.user.discriminator}. ID: #{event.user.id}. From the land of `#{event.server.name}` (Server ID: #{event.server.id}).
+    bot.send_message(252_239_053_712_392_192, "New Feedback from `#{event.user.name}`\##{event.user.discriminator}. ID: #{event.user.id}. From the land of `#{event.server.name}` (Server ID: #{event.server.id}).
 *#{args.join(' ')}*")
-    m = (event.respond "Radical! Feedback sent.")
-    bot.send_message(281280895577489409, "^feedback | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
+    m = (event.respond 'Radical! Feedback sent.')
+    bot.send_message(281_280_895_577_489_409, "^feedback | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
     sleep 5
     m.delete
   end
@@ -360,6 +356,6 @@ end
 
 bot.run :async
 
-bot.send_message(287050338144616449, "Restarted/Booted successfully")
+bot.send_message(287_050_338_144_616_449, 'Restarted/Booted successfully')
 
 bot.sync

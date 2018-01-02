@@ -21,3 +21,6 @@ Lint/UselessAssignment:
 
 Style/GuardClause:
   Enabled: false
+
+Lint/ShadowingOuterLocalVariable:
+  Enabled: false
