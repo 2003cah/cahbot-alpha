@@ -264,6 +264,7 @@ end
 bot.command(:thanks, help_available: false, max_args: 0, usage: 'A^thanks') do |event|
   event << 'Thanks so much to these current Donors:'
   event << 'ChewLeKitten#6216 - Cool Donor, Contributor, and an ultra-rad person'
+  event << 'Soarn#7582 - donated money once, and supplied https://cah.soarn.pro/' 
   puts "^thanks | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})"
 end
 
@@ -291,7 +292,7 @@ bot.command(:help, help_available: false, max_args: 0, usage: 'A^help') do |even
 end
 
 bot.command(:noot, help_available: false, max_args: 0, usage: 'A^noot') do |event|
-  event.respond '**NOOT** https://cahbot.pro/noot.gif'
+  event.respond '**NOOT** https://cah.soarn.pro/noot.gif'
   bot.send_message(281_280_895_577_489_409, "^noot | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})")
 end
 
