@@ -155,7 +155,7 @@ bot.command(:announce, help_available: false, min_args: 2, usage: 'A^announce no
       event.respond "Announced successfully, <@#{event.user.id}>"
     end
   rescue => e
-    event.respond "Ah geez, something bad happened. This might be due to you not having an \#announcements channel. Nonetheless, this has been reported to Cah"
+    event.respond "Ah geez, something bad happened. This might be due to you not having an \#announcements channel."
   end
 end
 
@@ -190,16 +190,16 @@ bot.command(:info, help_available: false, max_args: 0, usage: 'A^info') do |even
   event << '**Nani?** CahBot Alpha is the last living CB after shutting down the server'
   event << '**Who made CahBot?** Cah#6112 did, mostly'
   event << '**Why does CahBot exist?** A long time ago I wanted to make a discord bot people would actually use, I kinda failed'
-  event << '**Does CahBot have a server or something?** Yes, but you can\'t speak in it at all, https://discord.gg/cWmvfmz'
+  event << '**Does CahBot have a server or something?** No, servers are currently being fixed, for more updates, checkout https://cah.soarn.pro'
   event << '**u suk a bunnch an u can hardly mak a discord bawt.** Yeah, I know'
 end
 
 bot.command(:trello, help_available: false, max_args: 0, usage: 'A^trello') do |event|
-  event.respond 'The Trello board for CahBot: https://goo.gl/QNJa3E'
+  event.respond 'The Trello board for CahBot: https://cah.soarn.pro/trello'
 end
 
 bot.message(with_text: 'CBA prefix') do |event|
-  event.respond 'My prefix is `A^`. For help, do `A^help`'
+  event.respond 'My prefix is `A^`. For help, do `A^help`, for commands, do `A^cmds`, and for information, do `A^info`.'
 end
 
 bot.command(:rnumber, help_available: false, min_args: 2, max_args: 2, usage: 'A^rnumber <small num> <large num>') do |event, min, max|
@@ -207,7 +207,7 @@ bot.command(:rnumber, help_available: false, min_args: 2, max_args: 2, usage: 'A
 end
 
 bot.command(:invite, help_available: false, max_args: 0, usage: 'A^invite') do |event|
-  event.respond 'To invite me to your server, head over here: https://goo.gl/rBpKGh'
+  event.respond 'To invite me to your server, head over here: https://cah.soarn.pro/bot-invite'
 end
 
 bot.command(:say, help_available: false, required_permissions: [:manage_messages], permission_message: 'Sorry, you need the Manage Messages perm in order to use A^say') do |event, *_args|
@@ -237,6 +237,7 @@ end
 bot.command(:thanks, help_available: false, max_args: 0, usage: 'A^thanks') do |event|
   event << 'Thanks so much to these current Donors:'
   event << 'ChewLeKitten#6216 - Cool Donor, Contributor, and an ultra-rad person'
+  event << 'Soarn#7582 - donated once, supplied https://cah.soarn.pro '
   puts "^thanks | Command ran by #{event.user.name}\##{event.user.discriminator} (ID: #{event.user.id}) on server #{event.server.name} (ID: #{event.server.id})"
 end
 
@@ -245,7 +246,7 @@ bot.command(%i[servercount servcount], help_available: false, max_args: 0, usage
 end
 
 bot.command(:donate, help_available: false, max_args: 0, usage: 'A^donate') do |event|
-  event.respond "Hi #{event.user.name}, click here for donations: <https://goo.gl/QBvB7N> Since the bot is shut down for the most part, I wouldn't recommend this"
+  event.respond "Hi #{event.user.name}, click here for donations: https://cah.soarn.pro/patreon Since the bot is shut down for the most part, I wouldn't recommend this"
 end
 
 bot.command(:help, help_available: false, max_args: 0, usage: 'A^help') do |event|
@@ -254,7 +255,7 @@ bot.command(:help, help_available: false, max_args: 0, usage: 'A^help') do |even
 end
 
 bot.command(:noot, help_available: false, max_args: 0, usage: 'A^noot') do |event|
-  event.respond '**NOOT** https://cahbot.pro/noot.gif'
+  event.respond '**NOOT** https://cah.soarn.pro/noot.gif'
 end
 
 bot.command(%i[cmds commands], chain_usable: false, max_args: 0, usage: 'A^commands') do |event|
@@ -292,7 +293,7 @@ bot.command(%i[cmds commands], chain_usable: false, max_args: 0, usage: 'A^comma
   event << '`A^trello`: The Trello board, woahdude'
   event << '`A^noot`: noot (don\'t ask I didn\'t write this)'
   event << ''
-  event << 'As always, if you find a horrible bug, report it in the CB Server <https://goo.gl/02ZRK5>'
+  event << 'As always, if you find a horrible bug, report it in the CB Server <https://cah.soarn.pro/server-invite>'
 end
 
 bot.command(:feedback, min_args: 1) do |event, *args|
