@@ -17,7 +17,7 @@ end
 
 bot.command(:die, help_available: false) do |event|
   if event.user.id == 228_290_433_057_292_288
-    bot.send_message(event.channel.id, 'CahBot Alpha is shutting down')
+    event.respond 'CahBot Alpha is shutting down'
     exit
   else
     'Sorry, only Cah can kill me'
@@ -203,7 +203,7 @@ bot.message(with_text: 'CBA prefix') do |event|
 end
 
 bot.command(:rnumber, help_available: false, min_args: 2, max_args: 2, usage: 'A^rnumber <small num> <large num>') do |event, min, max|
-  rand(min.to_i..max.to_i)
+  event.respond rand(min.to_i..max.to_i)
 end
 
 bot.command(:invite, help_available: false, max_args: 0, usage: 'A^invite') do |event|
@@ -219,8 +219,8 @@ bot.command(:say, help_available: false, required_permissions: [:manage_messages
   end
 end
 
-bot.command(%i[reverse rev], help_available: false, min_args: 1, usage: '>sdrow< esrever^B') do |event, *args|
-  args.join(' ').to_s.reverse
+bot.command(%i[reverse rev], help_available: false, min_args: 1, usage: '>sdrow< esrever^A') do |event, *args|
+  event.respond args.join(' ').to_s.reverse
 end
 
 bot.command(:userinfo, help_available: false, max_args: 0, usage: 'A^userinfo') do |event|
@@ -301,17 +301,14 @@ bot.command(:feedback, min_args: 1) do |event, *args|
     bot.send_message(252_239_053_712_392_192, "New Feedback from `#{event.user.name}`\##{event.user.discriminator}. ID: #{event.user.id}. From a DM.
 
 *#{args.join(' ')}*")
-    m = (event.respond 'Radical! Feedback sent.')
-    sleep 5
-    m.delete
   else
     event.message.delete
     bot.send_message(252_239_053_712_392_192, "New Feedback from `#{event.user.name}`\##{event.user.discriminator}. ID: #{event.user.id}. From the land of `#{event.server.name}` (Server ID: #{event.server.id}).
 *#{args.join(' ')}*")
-    m = (event.respond 'Radical! Feedback sent.')
-    sleep 5
-    m.delete
   end
+  m = (event.respond 'Radical! Feedback sent.')
+  sleep 5
+  m.delete
 end
 
 bot.run :async

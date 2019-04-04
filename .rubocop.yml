@@ -13,7 +13,7 @@ Metrics/BlockLength:
 Security/Eval:
   Enabled: false
 
-Lint/RescueWithoutErrorClass:
+Style/RescueStandardError:
   Enabled: false
 
 Lint/UselessAssignment:
@@ -23,4 +23,7 @@ Style/GuardClause:
   Enabled: false
 
 Lint/ShadowingOuterLocalVariable:
+  Enabled: false
+
+Security/Open:
   Enabled: false
