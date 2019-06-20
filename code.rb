@@ -3,7 +3,7 @@ require 'configatron'
 require 'open-uri'
 require_relative 'config.rb'
 
-bot = Discordrb::Commands::CommandBot.new token: configatron.token, client_id: 291_390_171_151_335_424, prefix: ['A^', '<@291390171151335424> '], ignore_bots: true
+bot = Discordrb::Commands::CommandBot.new token: configatron.token, client_id: 291_390_171_151_335_424, prefix: ['A^', '<@291390171151335424> ', 'bruh', 'buh', 'moment'], ignore_bots: true
 
 bot.bucket :normal, limit: 5, time_span: 15, delay: 3
 
@@ -11,7 +11,27 @@ bot.ready do |_event|
   sleep 180
   bot.game = 'Use A^cmds or A^info'
   sleep 180
-  bot.game = "on #{bot.servers.count} servers!"
+  bot.game = "on #{bot.servers.count} servers!" # why is this the only line with double quotes?  wouldn't using those everywere save on a bunch of `don\'t`s?
+  sleep 180
+  bot.game = 'cah.soarn.pro'
+  sleep 180
+  bot.game = 'cah.soarn.pro/noot.gif'
+  sleep 180
+  bot.game = 'bruh?'
+  sleep 180
+  bot.game = 'moment?'
+  sleep 180
+  bot.game = 'bruh moment.'
+  sleep 180
+  bot.game = 'certified buh'
+  sleep 180
+  bot.game = `certified bruh-momentum free`
+  sleep 180
+  bot.game = 'please activate windows'
+  sleep 180
+  bot.game = 'I\'ll think about it.'
+  sleep 180
+  bot.game = '2003cah, 2 years ago • aaaaaa'
   redo
 end
 
@@ -55,7 +75,7 @@ end
 bot.command(:restart, help_available: false) do |event|
   if event.user.id == 228_290_433_057_292_288
     begin
-      event.respond ['Into the ***fuuuutttttuuuuurrrreeee***', 'Please wait...', 'How about n—', 'Can do :thumbsup::skin-tone-1:', 'Pong! Hey, that took... Oh wait, wrong command', 'Ask again at a later ti—'].sample
+      event.respond ['Into the ***fuuuutttttuuuuurrrreeee***', 'Please wait...', 'How about n—', 'Can do :thumbsup::skin-tone-1:', 'Pong! Hey, that took... Oh wait, wrong command', 'Ask again at a later ti—', 'Pong! Hey, that took...', 'do do DO do', 'no.', 'please don\'t pull a bruh mome'].sample
       exec('bash restart.sh')
     end
   else
